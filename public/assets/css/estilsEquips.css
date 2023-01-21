@@ -1,0 +1,74 @@
+body{
+    background-color: red;
+}
+
+h1#titolInici{
+    width: 50%;
+    color: red;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid red;
+}
+
+
+p#paragrafInici{
+    width: 80%;
+    border: 1px solid black;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #f2e7c3;
+}
+
+.imatgeInici{
+    width: 400px;
+    margin: 10px;
+}
+
+div#paragrafInici{
+    width: 80%;
+    border: 1px solid black;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #f2e7c3;
+}
+
+div#paragrafInici li{
+    list-style: none;
+}
+
+div#paragrafInici ul{
+    margin: auto;
+    width: 35%;
+}
+
+div#paragrafInici ul li{
+    padding: 1%;
+    border: 2px solid black;
+    background-color: #f2db98;
+}
+
+div#paragrafInici ul li a{
+    border: 2px solid black;
+    background-color: lightgrey;
+    display: block;
+    width: 50%;
+    padding: 1%;
+    margin: auto;
+    text-align: center;
+
+}
+
+p#no_trobat{
+    color: red;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+}
+
+
+
