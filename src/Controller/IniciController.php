@@ -1,7 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\Service\ServeiDadesEquips;
+use App\Entity\Equip;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,15 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IniciController extends AbstractController
 {
-   private $equip;
-    public function __construct(ServeiDadesEquips $equip)
-    {
-        $this->equip = $equip->get();
-    }
-
-    #[Route("/",name:'inici')]
-     public function inici(){
-      return $this->render('inicio.html.twig', array('equip' => $this->equip));
+   #[Route('/' ,name:'inici')]
+   public function inici(ManagerRegistry $doctrine)
+   {
+       $repositori = $doctrine->getRepository(Equip::class);
+       $equips = $repositori->findAll();
+       return $this->render('inici.html.twig',array('equips'=>$equips));
    }
 
 }

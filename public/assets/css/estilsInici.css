@@ -8,6 +8,17 @@ h1#titolInici{
     background-color: white;
 }
 
+h2#titolSecundari{
+    width: 50%;
+    color: red;
+    border: solid red 1px;
+    margin: 10px auto;
+    text-align:center;
+    padding:10px;
+    background-color:white;
+    }
+
+
 p#paragrafInici{
     width: 80%;
     border: 1px solid black;
@@ -47,7 +58,7 @@ div.caja1 > #llista_equips{
     
 }
 
-#llista_equips li{
+#llista_equips a{
     border: 2px solid black;
     width: 50%;
     margin: auto;
@@ -58,3 +69,11 @@ div.caja1 > #llista_equips{
     text-align: center;
 }
 
+
+.exception{
+    border:2px solid red;
+    padding: 5px;
+    background-color: lightblue;
+    width:55%;
+    margin: auto;
+}

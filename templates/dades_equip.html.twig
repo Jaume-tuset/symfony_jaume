@@ -1,49 +1,50 @@
 {% extends "base.html.twig" %}
-{% block title %}Equips{% endblock %}
+{% block title %}Dades Equips{% endblock %}
 {% block stylesheets %}
     {{ encore_entry_link_tags('app')  }}
     <link href="{{ asset('assets/css/estilsEquips.css') }}" rel="stylesheet">
 {% endblock %}
 {% block body %}
-    {% if dades %}
-    <h1 id="titolInici">Dades de Equips {{ dades.codi }} </h1>
-    <div class="caja1">
-        <p id="paragrafInici">Proyecte 2n DAW <br>
-            <img class="imatgeInici" src=" {{ asset(dades.img) }} " />
-        </p>
+    {% if equip %}
+    <p id="paragrafInici">Proyecte 2n DAW <br>
+     <img class="imatgeInici" src=" {{ asset(equip.getImatge) }} " />
+    </p>
         <div id="paragrafInici">
-            <ul>
-                <li><strong>Codi : </strong> {{ dades.codi }}</li>
-                <li><strong>Nom : </strong> {{ dades.nom }}</li>
-                <li><strong>Code :</strong> {{ dades.cicle }}</li>
-                <li><strong>Curs :</strong> {{ dades.curs }}</li>
-                <li><strong>Membres : </strong><br>
-                    {% for i in dades.membres %}
-                        <a> {{ i }} </a>
-                    {% endfor %}
-                </li>
-            </ul>            
+            <div class="contactes">
+                <p>Codi : {{ codi }} </p>       
+            </div>
+            <div class="contactes">
+                <p>Nom : {{ equip.getNom }} </p>
+            </div>
+            <div class="contactes">
+                <p>Cicle : {{ equip.getCicle }}  </p>
+            </div>
+            <div class="contactes">
+                <p>Curs : {{ equip.getCurs }} </p>
+            </div>
+            <div class="contactes">
+                <p>Nota : {{ equip.getNota }} </p>
+            </div>
         </div>
+
         <p id="paragrafInici">
             <img src="https://img.icons8.com/emoji/48/null/house-emoji.png" href="{{ path('inici') }}"/>
             <a href="{{ path('inici') }} "/>Torna a l'inici
         </p>
-    </div>
     {% else %}
          <h1 id="titolInici">Dades de Equips </h1>
-    <div class="caja1">
-        <p id="paragrafInici">Proyecte 2n DAW <br>
-            <img class="imatgeInici" src=" {{ asset('assets/img/tristeza.jpeg') }} " />
-        </p>
-        <div id="paragrafInici">
-            <p id="no_trobat">EQUIP no Trobat</p>
-        </div>
-        <p id="paragrafInici">
-            <img src="https://img.icons8.com/emoji/48/null/house-emoji.png" href="{{ path('inici') }}"/>
-            <a href="{{ path('inici') }} "/>Torna a l'inici
-        </p>
-    
-    </div>
+            <div class="caja1">
+                <p id="paragrafInici">Proyecte 2n DAW <br>
+                    <img class="imatgeInici" src=" {{ asset('assets/img/tristeza.jpeg') }} " />
+                </p>
+                <div id="paragrafInici">
+                    <p id="no_trobat">EQUIP no Trobat</p>
+                </div>
+                <p id="paragrafInici">
+                    <img src="https://img.icons8.com/emoji/48/null/house-emoji.png" href="{{ path('inici') }}"/>
+                    <a href="{{ path('inici') }} "/>Torna a l'inici
+                </p>
+            </div>
     {% endif %}
 
 {% endblock %}

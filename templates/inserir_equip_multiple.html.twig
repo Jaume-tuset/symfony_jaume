@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}Equips {% endblock %}
+{% block stylesheets %}
+	<link href="{{ asset('assets/css/estilsInici.css') }}" rel="stylesheet">
+{% endblock %}
+{% block header %}
+{{ parent() }}
+{% endblock %}
+{% block body %}
+	{% if error %}
+		<body>
+			<h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
+			<h2 id="titolSecundari">Error en la inserció dels equips
+				<br/>
+				{% for equip in equips %}
+					{{ equip.getNom }}<br/>
+				{% endfor %}
+			</h2>
+			<p id="paragrafInici">
+				<img class="imatgeInici" src="{{ asset('assets/img/datkmage.jpeg') }}"/></br>			
+                <div class="exception">{{error}}</div>
+            </p>
+    	    <p id="paragrafInici">
+                <img src="https://img.icons8.com/emoji/48/null/house-emoji.png" href="{{ path('inici') }}"/>
+                <a href="{{ path('inici') }} "/>Torna a l'inici</a>		
+            </p>
+        </body>
+    {% else %}
+        <body>
+	        <h1 id="titolInici">Projecte Symphony Equips 2n DAW </h1>
+	        <h2 id="titolSecundari">Equips:<br/>
+		        {% for equip in equips %}
+			        {{equip.getNom}} amb id: {{ equip.getId }} <br/>
+		        {% endfor %}
+		        
+                Inserits correctament
+	        </h2>
+	        <p id="paragrafInici">
+		        <img class="imatgeInici" src="{{ asset('assets/img/hero.jpeg') }}"/>
+	        </p>
+	        <p id="paragrafInici">
+                <img src="https://img.icons8.com/emoji/48/null/house-emoji.png" href="{{ path('inici') }}"/>
+                <a href="{{ path('inici') }}">Torna a l'inici</a>             
+	        </p>
+        </body>
+    {% endif %}
+{% endblock %}

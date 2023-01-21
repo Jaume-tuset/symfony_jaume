@@ -61,6 +61,16 @@ div#paragrafInici ul li a{
     text-align: center;
 
 }
+.contactes{
+    border: 2px solid black;
+    margin: 5px auto;
+    width: 30%;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    background-color: olive;
+    padding: 10px;
+}
 
 p#no_trobat{
     color: red;

@@ -14,9 +14,9 @@
     <h1 id="titol_llista_equips">Llistat d'equips</h1>
     <div class="caja1">
         <div id="llista_equips">
-        {% if equip %}
-            {% for eq in equip %}
-                <li> {{ eq.nom }} </li>
+        {% if equips %}
+            {% for eq in equips %}
+                <a href="{{ path('dades_equip')}}/{{eq.getId}} "> {{ eq.getNom }} </a>
             {% endfor %}
         {% endif %}
         </p>
