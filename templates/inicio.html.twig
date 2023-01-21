@@ -11,4 +11,14 @@
         <br> IES LLuís Simarro <br> Curs 22/23 <br>
         <img class="imatgeInici" src=" {{ asset('assets/img/manosUnidas.jpeg') }} " /></p>
     </div>
+    <h1 id="titol_llista_equips">Llistat d'equips</h1>
+    <div class="caja1">
+        <div id="llista_equips">
+        {% if equip %}
+            {% for eq in equip %}
+                <li> {{ eq.nom }} </li>
+            {% endfor %}
+        {% endif %}
+        </p>
+    </div>
 {% endblock %}

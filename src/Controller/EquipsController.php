@@ -4,32 +4,17 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\ServeiDadesEquips;
 
 class EquipsController extends AbstractController
 {
-    private $equips = array(
-        array("codi" => "1",
-            "nom" => "Equipo Rojo",
-            "cicle" => "DAW",
-            "curs" => "22/23",
-            "membres" => array("David", "Alejandro", "Jose", "Marta")),
-        array("codi" => "2",
-            "nom" => "Equipo Amarillo",
-            "cicle" => "DAM",
-            "curs" => "19/20",
-            "membres" => array("Pepe", "Luis", "Silvia", "Anna")),
-        array("codi" => "3",
-            "nom" => "Equipo Naranja",
-            "cicle" => "ASIX",
-            "curs" => "20/21",
-            "membres" => array("Pablo", "Lucas", "Sabrina", "Anastasia")),
-        array("codi" => "4",
-            "nom" => "Equipo Verde",
-            "cicle" => "AMX",
-            "curs" => "18/19",
-            "membres" => array("Hernesto", "Hugo", "Alba", "Natalaia")),
-    );
-    
+    private $dadesEquips;
+    private $equips;
+    public function __construct($dadesEquips)
+    {
+        $this->equips = $dadesEquips->get();
+    }
+
     #[Route('/equip/{codi<\d+>?1}',name:'dades_equip')]
      public function dades($codi){
         $resultat = array_filter(
