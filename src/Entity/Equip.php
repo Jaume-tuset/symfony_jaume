@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EquipRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 use function PHPSTORM_META\type;
 

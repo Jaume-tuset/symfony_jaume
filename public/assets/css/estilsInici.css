@@ -54,21 +54,28 @@ div.caja1 > #llista_equips{
 }
 
 #llista_equips {
-    list-style: none;
-    
-}
-
-#llista_equips a{
-    border: 2px solid black;
-    width: 50%;
-    margin: auto;
-    color: blue;
-    background-color: aliceblue;
-    padding: 1%;
+    list-style: none;   
     display: block;
-    text-align: center;
+    margin: 10px 10px 10px 10px;
 }
 
+#llista_equips > div {
+    display: inline-block;
+    width: 50%;
+
+    border: 2px solid black;
+    text-decoration: none;
+    padding: 1%;
+    text-align: center;
+    color: aqua;
+}
+
+img.lapiz{  
+    width: 30px;
+    margin: auto;
+    padding: 2px;  
+
+}
 
 .exception{
     border:2px solid red;

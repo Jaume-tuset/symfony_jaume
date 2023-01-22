@@ -16,7 +16,12 @@
         <div id="llista_equips">
         {% if equips %}
             {% for eq in equips %}
-                <a href="{{ path('dades_equip')}}/{{eq.getId}}"> {{ eq.getNom }}(nota:{{eq.getNota}}) </a>
+                <div id="equipos">
+                    <a href="{{ path('dades_equip')}}/{{eq.getId}}"> {{ eq.getNom }}(nota:{{eq.getNota}})
+                    <a class="lapiz" href ="{{ path('editar_equip') }}/{{ eq.getId}}">
+                        <img class="lapiz" src="{{ asset('assets/img/lapiz.jpeg') }}" />
+                    </a>
+                </div>
             {% endfor %}
         {% endif %}
         </p>

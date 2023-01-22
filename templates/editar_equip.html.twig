@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Editar equipo{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('assets/css/estilsEquips.css') }}" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    <h1 id="titolInici">Editar equip</h1>
+    <div id="paragrafInici">
+    {% if error %}
+        <div class="exception">{{error}}</div>
+    {% endif %}
+    {{ form_start(formulari) }}
+    {{ form_widget(formulari) }}
+    {{ form_end(formulari) }}
+    </div>
+     <div id="paragrafInici"><img class="imatgeEquip" src="{{ asset(imatge)}}"/></div>
+    <div id="paragrafInici"><a class="nav-link" href ="{{ path('inici') }}">Tornar a l'inici</a></div>
+{% endblock %}
+
+{% block footer %}
+{{ parent() }}
+{% endblock %}

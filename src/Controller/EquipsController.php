@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Equip;
+use App\Entity\Membre;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -27,12 +28,14 @@ class EquipsController extends AbstractController
     public function dades(ManagerRegistry $doctrine,$codi=1)
     {
         $repositori = $doctrine->getRepository(Equip::class);
+        $repositori_membre = $doctrine->getRepository(Membre::class);
         $equip = $repositori->find($codi);
+        $membres = $repositori_membre->findAll();
         
         if ($equip!=null)
-            return $this->render('equip.html.twig', array('equip'=>$equip,'codi'=>$codi));
+            return $this->render('equip.html.twig', array('equip'=>$equip,'codi'=>$codi,'membres'=>$membres));
         else
-            return $this->render('equip.html.twig', array('equip' => NULL,'codi'=>NULL));
+            return $this->render('equip.html.twig', array('equip' => NULL,'codi'=>NULL,'membres'=>NULL));
 
     }
 
@@ -189,6 +192,72 @@ class EquipsController extends AbstractController
             array('formulari' => $formulari->createView(),"error"=>$error));
         }
     }
+
+
+    #[Route('/equip/editar/{codi}' ,name:'editar_equip', requirements: ['codi' => '\d+'])]
+    public function editarEquip(ManagerRegistry $doctrine, $codi=0){
+
+        $error=null;
+        $repositori = $doctrine->getRepository(Equip::class);
+        $equip = $repositori->find($codi);
+        $formulari = $this->createFormBuilder($equip)
+        ->add('nom', TextType::class)
+        ->add('cicle', TextType::class)
+        ->add('curs', TextType::class)
+        ->add('imatge', FileType::class,['mapped'=>false,'required'=>false])
+        ->add('Nota', NumberType::class)
+        ->add('save', SubmitType::class, array('label' => 'Enviar'))
+        ->getForm();
+
+    
+        if ($formulari->isSubmitted() && $formulari->isValid()) {
+            $fitxer = $formulari->get('imatge')->getData();
+         
+            if ($fitxer) { 
+               $nomFitxer = "assets/img/equipos/".$fitxer->getClientOriginalName();
+                $directori =
+                $this->getParameter('kernel.project_dir')."/public/assets/img/equipos";
+            
+                if($equip->getImatge()!="assets/img/equipos/equipPerDefecte.jpeg"){
+                    unlink($equip->getImatge());
+                }
+                
+                try {
+                    $fitxer->move($directori,$nomFitxer);
+                } catch (FileException $e) {
+                    $error=$e->getMessage();
+                    return $this->render('editar_equip.html.twig', array(
+                    'formulari' => $formulari->createView(), "error"=>$error));
+                }
+    
+                $equip->setImatge($nomFitxer); 
+    
+            } 
+
+            $equip->setNom($formulari->get('nom')->getData());
+            $equip->setCicle($formulari->get('cicle')->getData());
+            $equip->setCurs($formulari->get('curs')->getData());
+            $equip->setNota($formulari->get('nota')->getData());
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($equip);
+    
+            try{
+                $entityManager->flush();
+                return $this->redirectToRoute('inici');
+            }catch (\Exception $e) {
+                $error=$e->getMessage();
+                return $this->render('editar_equip.html.twig', array(
+                'formulari' => $formulari->createView(), "error"=>$error));
+            }
+        }else{
+            return $this->render('editar_equip.html.twig',
+            array('formulari' => $formulari->createView(),"error"=>$error,"imatge"=>$equip->getImatge()));
+        }
+
+
+    }
+
+
 }
 
 ?>

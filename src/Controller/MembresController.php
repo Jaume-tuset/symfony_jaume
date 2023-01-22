@@ -114,12 +114,76 @@ class MembresController extends AbstractController
             return $this->render('nou_membre.html.twig',
             array('formulari' => $formulari->createView(),"error"=>$error));
         }
+    }
 
 
+    #[Route('/membre/editar/{codi}', name:'editar_membre',requirements:['codi'=>'\d+'])]
+    public function editarMembre(ManagerRegistry $doctrine, Request $request, $codi=0){
+        
+        $error = null;
+        $repositori = $doctrine->getRepository(Membre::class);
+        $equip = $repositori->find($codi);
+        $formulari = $this->createFormBuilder($equip)
+        ->add('nom', TextType::class)
+        ->add('cognoms', TextType::class)
+        ->add('email', TextType::class)
+        ->add('dataNaixement', DateType::class, ['years'=>range(1920,2022)])
+        ->add('imatgePerfil',FileType::class,['mapped'=>false,'required' => false])
+        ->add('equip', EntityType::class, array('class' => Equip::class,'choice_label' => 'nom',))
+        ->add('nota', NumberType::class)
+        ->add('save', SubmitType::class, array('label' => 'Enviar'))
+        ->getForm();
 
+        $formulari->handleRequest($request);
 
+        if ($formulari->isSubmitted() && $formulari->isValid()) {
+            $fitxer = $formulari->get('imatgePerfil')->getData();
+            
+            if ($fitxer) { 
+                $nomFitxer = $fitxer->getClientOriginalName();
+                $directori =
+                $this->getParameter('kernel.project_dir')."/public/assets/img/membres";
+                if($equip->getImatgePerfil()!="membrePerDefecte.jpeg"){
+                    unlink("assets/img/membres/" . $equip->getImatgePerfil());
+                }
+                
+                try {
+                    $fitxer->move($directori,$nomFitxer);
+                } catch (FileException $e) {
+                    $error=$e->getMessage();
+                    return $this->render('editar_membre.html.twig', array(
+                    'formulari' => $formulari->createView(), "error"=>$error));
+                }
+    
+                $equip->setImatgePerfil($nomFitxer); 
+    
+            } else { 
+    
+                $equip->setImatgePerfil('membrePerDefecte.jpeg');
+    
+            }
 
-
+            $equip->setNom($formulari->get('nom')->getData());
+            $equip->setCognoms($formulari->get('cognoms')->getData());
+            $equip->setEmail($formulari->get('email')->getData());
+            $equip->setDataNaixement($formulari->get('dataNaixement')->getData());
+            $equip->setEquip($formulari->get('equip')->getData());
+            $equip->setNota($formulari->get('nota')->getData());
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($equip);
+           
+            try{
+                $entityManager->flush();
+                return $this->redirectToRoute('inici');
+            }catch (\Exception $e) {
+                $error=$e->getMessage();
+                return $this->render('editar_membre.html.twig', array(
+                'formulari' => $formulari->createView(), "error"=>$error,"imatge"=>$equip->getImatgePerfil()));
+            }
+        }else{
+            return $this->render('editar_membre.html.twig',
+            array('formulari' => $formulari->createView(),"error"=>$error,"imatge"=>$equip->getImatgePerfil()));
+        }
     }
 }
 

@@ -30,6 +30,9 @@
         <p id="paragrafInici">
             <img src="https://img.icons8.com/emoji/48/null/house-emoji.png" href="{{ path('inici') }}"/>
             <a href="{{ path('inici') }} "/>Torna a l'inici
+            <a class="lapiz" href ="{{ path('editar_equip') }}/{{ equip.getId}}">
+                <img class="lapiz" src="{{ asset('assets/img/lapiz.jpeg') }}" />
+            </a>
         </p>
     {% else %}
          <h1 id="titolInici">Dades de Equips </h1>
@@ -43,6 +46,9 @@
                 <p id="paragrafInici">
                     <img src="https://img.icons8.com/emoji/48/null/house-emoji.png" href="{{ path('inici') }}"/>
                     <a href="{{ path('inici') }} "/>Torna a l'inici
+                    <a class="lapiz" href ="{{ path('editar_equip') }}/{{ eq.getId}}">
+                        <img class="lapiz" src="{{ asset('assets/img/lapiz.jpeg') }}" />
+                    </a>
                 </p>
             </div>
     {% endif %}
