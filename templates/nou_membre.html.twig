@@ -9,10 +9,12 @@
 {% endblock %}
 {% block body %}
     {% if error %}
+        {{ form(form) }}
         <div class="exception">{{error}}</div>
     {% endif %}
     <h1 id="titolInici">Nou Membre</h1>
     <div id="paragrafInici">
+        {{ form(form) }}
         {{ form_start(formulari) }}
         {{ form_widget(formulari) }}
         {{ form_end(formulari) }}

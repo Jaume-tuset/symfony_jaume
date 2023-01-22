@@ -5,9 +5,6 @@ namespace App\Entity;
 use App\Repository\EquipRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-
-use function PHPSTORM_META\type;
 
 #[ORM\Entity(repositoryClass: EquipRepository::class)]
 class Equip
@@ -36,7 +33,8 @@ class Equip
     private ?string $imatge = null;
 
     #[Assert\NotBlank]
-    
+    #[Assert\LessThanOrEqual(10,message:"La nota ha de ser menor o igual que 10")]
+    #[Assert\GreaterThanOrEqual(0,message:"La nota ha de ser mayor o igual que 10")]
     #[ORM\Column(nullable: true)]
     private ?float $nota = null;
 
