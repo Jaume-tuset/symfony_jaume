@@ -12,7 +12,14 @@ h1#titolInici{
     border: 2px solid red;
 }
 
-
+div#paragrafInici{
+    width: 80%;
+    border: 1px solid black;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #f2e7c3;
+}
 p#paragrafInici{
     width: 80%;
     border: 1px solid black;

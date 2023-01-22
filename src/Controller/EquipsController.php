@@ -4,9 +4,15 @@ namespace App\Controller;
 use App\Entity\Equip;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ServeiDadesEquips;
+use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class EquipsController extends AbstractController
 {
@@ -122,6 +128,63 @@ class EquipsController extends AbstractController
                 'equips' => $equips,
                 'error' => $error,
             ]);
+        }
+    }
+
+
+    #[Route('/equip/nou/',name:'nou_equip')]
+    public function nou(){
+      
+        $error=null;
+        $equip = new Equip();
+        $formulari = $this->createFormBuilder($equip)
+        ->add('nom', TextType::class)
+        ->add('cicle', TextType::class)
+        ->add('curs', TextType::class)
+        ->add('Imatge', FileType::class)
+        ->add('Nota', NumberType::class)
+        ->add('save', SubmitType::class, array('label' => 'Enviar'))
+        ->getForm();
+
+        if ($formulari->isSubmitted() && $formulari->isValid()) {
+            $fitxer = $formulari->get('imatge')->getData();
+            if ($fitxer) { // si s’ha indicat un fitxer al formulari
+                $nomFitxer = "assets/img/equipos/".$fitxer->getClientOriginalName();
+                //ruta a la carpeta de les imatges d’equips, relativa a index.php
+                //aquest directori ha de tindre permisos d’escriptura
+                $directori =
+                $this->getParameter('kernel.project_dir')."/public/assets/img/equipos/";
+            
+                try {
+                    $fitxer->move($directori,$nomFitxer);
+                } catch (FileException $e) {
+                    $error=$e->getMessage();
+                    return $this->render('nou_equip.html.twig', array(
+                    'formulari' => $formulari->createView(), "error"=>$error));
+                }
+            
+                $equip->setImatge($nomFitxer); // valor del camp imatge
+            
+            } else {//no hi ha fitxer, imatge per defecte
+                $equip->setImatge('assets/img/equipos/equipPerDefecte.jpeg');
+            }
+            
+            //hem d’assignar els camps de l’equip 1 a 1
+            $equip->setNom($formulari->get('nom')->getData());
+            $equip->setCicle($formulari->get('cicle')->getData());
+            $equip->setCurs($formulari->get('curs')->getData());
+            $equip->setNota($formulari->get('nota')->getData());
+        
+            try{
+                return $this->redirectToRoute('inici');
+            } catch (\Exception $e) {
+                $error=$e->getMessage();
+                return $this->render('nou_equip.html.twig', array(
+                'formulari' => $formulari->createView(), "error"=>$error));
+            }
+        }else{
+            return $this->render('nou_equip.html.twig',
+            array('formulari' => $formulari->createView(),"error"=>$error));
         }
     }
 }

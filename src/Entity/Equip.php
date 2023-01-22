@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\EquipRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+
+use function PHPSTORM_META\type;
 
 #[ORM\Entity(repositoryClass: EquipRepository::class)]
 class Equip
@@ -13,18 +16,26 @@ class Equip
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 50,unique:true)]
     private ?string $nom = null;
+
+    #[Assert\NotBlank]
 
     #[ORM\Column(length: 10)]
     private ?string $cicle = null;
 
+    #[Assert\NotBlank]
+
     #[ORM\Column(length: 10)]
     private ?string $curs = null;
+
 
     #[ORM\Column(length: 255)]
     private ?string $imatge = null;
 
+    #[Assert\NotBlank]
+    
     #[ORM\Column(nullable: true)]
     private ?float $nota = null;
 

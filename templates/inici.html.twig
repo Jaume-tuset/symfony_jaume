@@ -16,7 +16,7 @@
         <div id="llista_equips">
         {% if equips %}
             {% for eq in equips %}
-                <a href="{{ path('dades_equip')}}/{{eq.getId}} "> {{ eq.getNom }} </a>
+                <a href="{{ path('dades_equip')}}/{{eq.getId}}"> {{ eq.getNom }}(nota:{{eq.getNota}}) </a>
             {% endfor %}
         {% endif %}
         </p>
