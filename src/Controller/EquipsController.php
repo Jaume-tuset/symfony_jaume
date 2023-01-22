@@ -133,7 +133,7 @@ class EquipsController extends AbstractController
 
 
     #[Route('/equip/nou/',name:'nou_equip')]
-    public function nou(){
+    public function nou(ManagerRegistry $doctrine){
       
         $error=null;
         $equip = new Equip();
@@ -174,7 +174,9 @@ class EquipsController extends AbstractController
             $equip->setCicle($formulari->get('cicle')->getData());
             $equip->setCurs($formulari->get('curs')->getData());
             $equip->setNota($formulari->get('nota')->getData());
-        
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($equip);
+            
             try{
                 return $this->redirectToRoute('inici');
             } catch (\Exception $e) {
