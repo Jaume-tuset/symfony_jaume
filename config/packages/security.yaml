@@ -5,7 +5,7 @@ security:
         App\Entity\Usuari:
             algorithm: bcrypt
             cost: 12
-            
+
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
@@ -19,6 +19,8 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+        logout:
+            path: /logout
             lazy: true
             provider: app_user_provider
             form_login:

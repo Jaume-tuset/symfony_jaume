@@ -86,6 +86,13 @@
   {% endblock %}
 {% block body %}
   <!-- ======= Hero Section ======= -->
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div>
+      Benvingut/da, {{ app.user.username }}
+      <a href=" {{ path('logout') }}">Tancar sessió</a>
+    </div>
+  {% endif %}
+  
   <section id="hero">
     <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
