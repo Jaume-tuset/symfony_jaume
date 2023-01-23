@@ -70,6 +70,10 @@ div.caja1 > #llista_equips{
     color: aqua;
 }
 
+div > a {
+    text-decoration: none;
+}
+
 img.lapiz{  
     width: 30px;
     margin: auto;
@@ -83,4 +87,22 @@ img.lapiz{
     background-color: lightblue;
     width:55%;
     margin: auto;
+}
+
+div#paragrafSecundari{
+    display: flex;
+    justify-content: center;
+    margin: 5px auto;
+}
+
+#paragrafSecundari > a{
+    margin: auto;
+    text-decoration: none;
+    margin-right: 30%;
+    width: 90%;
+}
+
+img#logo_avatar{
+    margin-left: 20%;
+    width: 20%;
 }

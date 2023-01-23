@@ -41,6 +41,7 @@ div#paragrafInici{
     text-align: center;
     padding: 10px;
     background-color: #f2e7c3;
+    
 }
 
 div#paragrafInici li{
@@ -61,22 +62,34 @@ div#paragrafInici ul li{
 div#paragrafInici ul li a{
     border: 2px solid black;
     background-color: lightgrey;
-    display: block;
     width: 50%;
     padding: 1%;
     margin: auto;
-    text-align: center;
 
 }
+
 .contactes{
     border: 2px solid black;
     margin: 5px auto;
-    width: 30%;
+    width: 60%;
     font-size: 2em;
-    font-weight: bold;
     color: white;
     background-color: olive;
+    text-align: start;
     padding: 10px;
+}
+
+.contactes div#membres_equip{
+    display: block;
+    margin: auto 10% auto;
+}
+
+.contactes div#membres_equip li{
+    margin: 10px auto;
+    background-color: aliceblue;
+    color: aquamarine;
+    padding: 1%;
+    text-transform: uppercase;
 }
 
 p#no_trobat{
@@ -87,10 +100,36 @@ p#no_trobat{
     margin: auto;
 }
 
-
+h2#titolImatge{
+    color: rgb(150, 0, 0);
+}
 
 img.lapiz{  
     width: 30px;
     margin: auto;
     padding: 2px;  
+}
+
+div#paragrafSecundari{
+    width: 80%;
+    border: 1px solid black;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #f2e7c3;
+    display: flex;
+    justify-content: center;
+    margin: 5px auto;
+}
+
+#paragrafSecundari > a{
+    margin: auto;
+    text-decoration: none;
+    margin-right: 30%;
+    width: 40%;
+}
+
+img#logo_avatar{
+    margin-left: 45%;
+    width: 10%;
 }
