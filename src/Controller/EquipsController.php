@@ -187,10 +187,6 @@ class EquipsController extends AbstractController
             array('formulari' => $formulari->createView(),"error"=>$error));
         }
 
-
-
-
-
       /*
         $error=null;
         $equip = new Equip();
@@ -251,7 +247,7 @@ class EquipsController extends AbstractController
 
     #[Route('/equip/editar/{codi}' ,name:'editar_equip', requirements: ['codi' => '\d+'])]
     public function editarEquip(ManagerRegistry $doctrine, Request $request, $codi=0){
-
+    /*
         $error=null;
         $equip = new Equip();
         $repositori = $doctrine->getRepository(Equip::class);
@@ -303,8 +299,8 @@ class EquipsController extends AbstractController
             array('formulari' => $formulari->createView(),"error"=>$error,"imatge"=>$equip->getImatge()));
         }
 
-
-        /*
+    */
+        
         $error=null;
         $repositori = $doctrine->getRepository(Equip::class);
         $equip = $repositori->find($codi);
@@ -362,7 +358,7 @@ class EquipsController extends AbstractController
             array('formulari' => $formulari->createView(),"error"=>$error,"imatge"=>$equip->getImatge()));
         }
 
-        */
+       
     }
 
 
